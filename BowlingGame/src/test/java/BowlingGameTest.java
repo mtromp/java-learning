@@ -13,4 +13,15 @@ public class BowlingGameTest {
         }
         assertEquals(0, game.score());
     }
+    @Test
+    public void scoreIsOneWhenOneRollIsOne() {
+        BowlingGame game = new BowlingGame();
+        game.roll(1);
+        for (int i=1; i<20; ++i)
+        {
+            game.roll(0);
+        }
+        assertEquals(1, game.score());
+    }
+
 }
