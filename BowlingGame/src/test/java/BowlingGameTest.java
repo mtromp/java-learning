@@ -39,4 +39,18 @@ public class BowlingGameTest {
         assertEquals(16, game.score());
     }
 
+    @Test
+    public void strikeAddsNextTwoRollsTwice() {
+        BowlingGame game = new BowlingGame();
+        game.roll(10);
+        game.roll(6);
+        game.roll(3);
+        // the rest are gutter balls
+        for (int i=3; i<20; ++i)
+        {
+            game.roll(0);
+        }
+        assertEquals(28, game.score());
+    }
+
 }
