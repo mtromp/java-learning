@@ -68,4 +68,12 @@ public class BowlingGameTest {
         assertEquals(51, game.score());
     }
 
+    @Test
+    public void perfectGameReturns300() {
+        BowlingGame game = new BowlingGame();
+        for (int i = 0; i < 12; i++) {
+            game.roll(10);
+        }
+        assertEquals(300, game.score());
+    }
 }
