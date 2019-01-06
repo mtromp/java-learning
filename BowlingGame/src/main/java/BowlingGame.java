@@ -6,9 +6,10 @@ public class BowlingGame {
         for(int i = 0; i < rolls.length; i++) {
             rolls[i] = 0;
         }
-        frames = new int[numFrames];
-        for(int i = 0; i < frames.length; i++) {
-            frames[i] = 0;
+        frames = new Frame[numFrames];
+        for(int i = 0; i < numFrames ; i++)
+        {
+            frames[i] = new Frame();
         }
     }
 
@@ -23,9 +24,13 @@ public class BowlingGame {
         placeRollsInFrames();
 
         for(int i = 0; i < frames.length; i++) {
-            total += frames[i];
-            if (frames[i] == 10){
-                total += rolls[(i+1)*2];
+            total += frames[i].score;
+            if (frames[i].score == 10){
+                if (frames[i].strike) {
+                    total += frames[i+1].score;
+                } else {
+                    total += rolls[(i + 1) * 2];
+                }
             }
         }
         return total;
@@ -33,18 +38,35 @@ public class BowlingGame {
 
     private void placeRollsInFrames() {
         int frameNumber = 0;
+        int nextRoll = 0;
         for (int i = 0; i < (rolls.length / 2); i++) {
-            frames[frameNumber] = rolls[i * 2];
-            frames[frameNumber] += rolls[(i * 2) + 1];
 
+            frames[frameNumber].score = rolls[nextRoll];
+            if (frames[frameNumber].score != 10) {
+                nextRoll++;
+                frames[frameNumber].score += rolls[nextRoll];
+            } else {
+                frames[frameNumber].strike = true;
+            }
+            nextRoll++;
             frameNumber++;
         }
-        frames[9] += rolls[rolls.length - 1];
+        frames[9].score += rolls[rolls.length - 1];
     }
 
     private int[] rolls;
     private int rollNumber;
-    private int[] frames;
+    private Frame[] frames;
     public final int numFrames = 10;
     public final int maxRolls = 21;
+
+    private class Frame {
+        public Frame() {
+            score = 0;
+            strike = false;
+        }
+        public int score;
+        public Boolean strike;
+    }
 }
+
