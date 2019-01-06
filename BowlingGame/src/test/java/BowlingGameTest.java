@@ -76,4 +76,28 @@ public class BowlingGameTest {
         }
         assertEquals(300, game.score());
     }
+
+    @Test
+    // from website: http://slocums.homestead.com/gamescore.html
+    public void completeGameReturns167() {
+        BowlingGame game = new BowlingGame();
+        game.roll(10);
+        game.roll(7);
+        game.roll(3);
+        game.roll(9);
+        game.roll(0);
+        game.roll(10);
+        game.roll(0);
+        game.roll(8);
+        game.roll(8);
+        game.roll(2);
+        game.roll(0);
+        game.roll(6);
+        game.roll(10);
+        game.roll(10);
+        game.roll(10);
+        game.roll(8);
+        game.roll(1);
+        assertEquals(167, game.score());
+    }
 }
