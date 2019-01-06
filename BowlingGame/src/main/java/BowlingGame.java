@@ -15,8 +15,25 @@ public class BowlingGame {
 
     public int score() {
         int total = 0;
-        for(int i = 0; i < rolls.length; i++) {
-            total += rolls[i];
+        int [] frames = new int[10];
+        for(int i = 0; i < frames.length; i++) {
+            frames[i] = 0;
+        }
+
+        int frameNumber = 0;
+        for (int i = 0; i < (rolls.length / 2); i++) {
+            frames[frameNumber] = rolls[i * 2];
+            frames[frameNumber] += rolls[(i * 2) + 1];
+
+            frameNumber++;
+        }
+        frames[9] += rolls[rolls.length - 1];
+
+        for(int i = 0; i < frames.length; i++) {
+            total += frames[i];
+            if (frames[i] == 10){
+                total += rolls[(i+1)*2];
+            }
         }
         return total;
     }
