@@ -3,7 +3,7 @@ public class BowlingGame {
     public BowlingGame() {
         rollNumber = 0;
         rolls = new int[maxRolls];
-        for(int i = 0; i < rolls.length; i++) {
+        for(int i = 0; i < maxRolls; i++) {
             rolls[i] = 0;
         }
         frames = new Frame[numFrames];
@@ -23,19 +23,22 @@ public class BowlingGame {
 
         placeRollsInFrames();
 
-        for(int i = 0; i < frames.length; i++) {
+        for(int i = 0; i < numFrames; i++) {
             total += frames[i].calcBallScore();
             if (frames[i].calcBallScore() == 10){
                 if (frames[i].strike) {
-                    if (i+1 < frames.length) {
+                    if (i+1 < numFrames) {
                         total += frames[i + 1].calcBallScore();
-                        if (frames[i + 1].strike && ((i + 2) < frames.length)) {
+                        if (frames[i + 1].strike && ((i + 2) < numFrames)) {
                             total += frames[i + 2].ball1;
                         } else {
                             total += frames[i + 1].ball3;
                         }
                     } else {
-                        total += frames[i].calcBallScore();
+                        total += frames[i].ball2 + frames[i].ball3;
+                        if (frames[i].ball2 == 10){
+                            total += frames[i].ball3;
+                        }
                     }
                 } else {
                     total += frames[i+1].ball1;
@@ -56,6 +59,9 @@ public class BowlingGame {
                 frames[frameNumber].ball2 = rolls[nextRoll];
             } else {
                 frames[frameNumber].strike = true;
+                if (frameNumber+1 == numFrames){
+                    frames[frameNumber].ball2 = rolls[++nextRoll];
+                }
             }
             nextRoll++;
             frameNumber++;
@@ -78,7 +84,7 @@ public class BowlingGame {
             strike = false;
         }
         public int calcBallScore() {
-            return (ball1 + ball2 + ball3);
+            return (ball1 + ball2);
         }
         public int score;
         public int ball1;
