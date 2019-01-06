@@ -53,4 +53,19 @@ public class BowlingGameTest {
         assertEquals(28, game.score());
     }
 
+    @Test
+    public void twoStrikesAdjacentFramesReturnsCorrectScore() {
+        BowlingGame game = new BowlingGame();
+        game.roll(10);
+        game.roll(10);
+        game.roll(3);
+        game.roll(6);
+        // the rest are gutter balls
+        for (int i=4; i<20; ++i)
+        {
+            game.roll(0);
+        }
+        assertEquals(51, game.score());
+    }
+
 }
