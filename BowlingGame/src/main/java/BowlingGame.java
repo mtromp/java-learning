@@ -27,9 +27,15 @@ public class BowlingGame {
             total += frames[i].calcBallScore();
             if (frames[i].calcBallScore() == 10){
                 if (frames[i].strike) {
-                    total += frames[i+1].calcBallScore();
-                    if (frames[i+1].strike) {
-                        total += frames[i+2].ball1;
+                    if (i+1 < frames.length) {
+                        total += frames[i + 1].calcBallScore();
+                        if (frames[i + 1].strike && ((i + 2) < frames.length)) {
+                            total += frames[i + 2].ball1;
+                        } else {
+                            total += frames[i + 1].ball3;
+                        }
+                    } else {
+                        total += frames[i].calcBallScore();
                     }
                 } else {
                     total += frames[i+1].ball1;
@@ -42,7 +48,8 @@ public class BowlingGame {
     private void placeRollsInFrames() {
         int frameNumber = 0;
         int nextRoll = 0;
-        for (int i = 0; i < (rolls.length / 2); i++) {
+
+        while (frameNumber < numFrames) {
             frames[frameNumber].ball1 = rolls[nextRoll];
             if (rolls[nextRoll] != 10) {
                 nextRoll++;
@@ -53,7 +60,7 @@ public class BowlingGame {
             nextRoll++;
             frameNumber++;
         }
-        frames[numFrames - 1].ball3 = rolls[rolls.length - 1];
+        frames[numFrames - 1].ball3 = rolls[nextRoll];
     }
 
     private int[] rolls;
