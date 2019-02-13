@@ -36,4 +36,12 @@ public class BowlingGameTest {
         multipleRolls(17, 0);
         assertEquals(20, game.score());
     }
+    @Test
+    public void rollingStrikesAddsNextTwoRollsTwice() {
+        game.roll(10);
+        multipleRolls(2, 5);
+        multipleRolls(17, 0);
+        assertEquals(30, game.score());
+    }
+
 }

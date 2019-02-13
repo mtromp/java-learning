@@ -13,6 +13,12 @@ public class BowlingGame {
         rollNumber = 0;
         int theFrame = 0;
         while (theFrame < 9) {
+            if (10 == rolls[rollNumber]) {
+                theScore += 10 + rolls[rollNumber + 1] + rolls[rollNumber +2];
+                rollNumber++;
+                theFrame++;
+                continue;
+            }
             if (10 == (rolls[rollNumber] + rolls[rollNumber + 1])) {
                 handleSpare();
                 theFrame++;
