@@ -27,8 +27,13 @@ public class BowlingGame {
             addRollToScore();
             theFrame++;
         }
-        addRollToScore();
-        addRollToScore();
+        if (10 == rolls[rollNumber]) {
+            handleStrike();
+            addRollToScore();
+        } else {
+            addRollToScore();
+            addRollToScore();
+        }
         return theScore;
     }
 
