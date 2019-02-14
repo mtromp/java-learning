@@ -48,5 +48,10 @@ public class BowlingGameTest {
         multipleRolls(11, 10);
         assertEquals(300, game.score());
     }
-
+    @Test
+    public void rollingSpareInTenthFrameIsScoredCorrectly() {
+        multipleRolls(18, 2);
+        multipleRolls(3,5);
+        assertEquals(56, game.score());
+    }
 }

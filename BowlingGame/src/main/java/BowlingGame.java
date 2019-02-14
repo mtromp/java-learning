@@ -30,6 +30,9 @@ public class BowlingGame {
         if (10 == rolls[rollNumber]) {
             handleStrike();
             addRollToScore();
+        } else if (10 == (rolls[rollNumber] + rolls[rollNumber + 1])) {
+            handleSpare();
+            addRollToScore();
         } else {
             addRollToScore();
             addRollToScore();
