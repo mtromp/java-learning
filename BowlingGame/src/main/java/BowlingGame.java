@@ -14,8 +14,7 @@ public class BowlingGame {
         int theFrame = 0;
         while (theFrame < 9) {
             if (10 == rolls[rollNumber]) {
-                theScore += 10 + rolls[rollNumber + 1] + rolls[rollNumber +2];
-                rollNumber++;
+                handleStrike();
                 theFrame++;
                 continue;
             }
@@ -36,6 +35,11 @@ public class BowlingGame {
     private void handleSpare() {
         theScore += 10 + rolls[rollNumber + 2];
         rollNumber += 2;
+    }
+
+    private void handleStrike() {
+        theScore += 10 + rolls[rollNumber + 1] + rolls[rollNumber +2];
+        rollNumber++;
     }
 
     private void addRollToScore() {
