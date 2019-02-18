@@ -1,6 +1,6 @@
 public class BowlingGame {
 
-    private int[] rolls = new int[22];
+    private int[] rolls = new int[21];
     private int rollNumber = 0;
     private int theScore = 0;
 
@@ -10,6 +10,24 @@ public class BowlingGame {
     }
 
     public int score() {
+        scoreFrames1to9();
+        scoreFrame10();
+        return theScore;
+    }
+
+    private void scoreFrame10() {
+        if (10 == rolls[rollNumber]) {
+            handleStrike();
+        } else if (10 == (rolls[rollNumber] + rolls[rollNumber + 1])) {
+            handleSpare();
+            addRollToScore();
+        } else {
+            addRollToScore();
+            addRollToScore();
+        }
+    }
+
+    private void scoreFrames1to9() {
         rollNumber = 0;
         int theFrame = 0;
         while (theFrame < 9) {
@@ -27,17 +45,6 @@ public class BowlingGame {
             addRollToScore();
             theFrame++;
         }
-        if (10 == rolls[rollNumber]) {
-            handleStrike();
-            addRollToScore();
-        } else if (10 == (rolls[rollNumber] + rolls[rollNumber + 1])) {
-            handleSpare();
-            addRollToScore();
-        } else {
-            addRollToScore();
-            addRollToScore();
-        }
-        return theScore;
     }
 
     private void handleSpare() {

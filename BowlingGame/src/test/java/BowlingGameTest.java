@@ -45,7 +45,7 @@ public class BowlingGameTest {
     }
     @Test
     public void rollingPerfectGameReturns300() {
-        multipleRolls(11, 10);
+        multipleRolls(12, 10);
         assertEquals(300, game.score());
     }
     @Test
